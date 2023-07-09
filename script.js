@@ -1,10 +1,10 @@
 const API_KEY = "d6e15237a78d41a6a9029b39bd51251c";
 const url = "https://newsapi.org/v2/everything?q=";
 
-window.addEventListener('load', () => fetchNews("pakistani news"));
+if (typeof window !== 'undefined') window.addEventListener('load', () => fetchNews("pakistani news"));
 
 function reload() {
-    window.location.reload();
+    if (typeof window !== 'undefined') window.location.reload();
 }
 
 async function fetchNews(query){
@@ -58,13 +58,15 @@ function onNavItemClick(id) {
     curSelectedNav.classList.add("active");
 }
 
-const searchButton = document.getElementById("search-button");
-const searchText = document.getElementById("search-text");
-
-searchButton.addEventListener("click", () => {
-    const query = searchText.value;
-    if (!query) return;
-    fetchNews(query);
-    curSelectedNav?.classList.remove("active");
-    curSelectedNav = null;
-});
+if (typeof window !== 'undefined') {
+    const searchButton = document.getElementById("search-button");
+    const searchText = document.getElementById("search-text");
+    
+    searchButton.addEventListener("click", () => {
+        const query = searchText.value;
+        if (!query) return;
+        fetchNews(query);
+        curSelectedNav?.classList.remove("active");
+        curSelectedNav = null;
+    });
+}
